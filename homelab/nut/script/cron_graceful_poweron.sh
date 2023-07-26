@@ -2,8 +2,8 @@
 
 logdir=/etc/nut/log
 workingdir="/etc/nut/script"
-flagfile=/tmp/poweron_flag_running
 
+flagfile=/tmp/poweron_flag_running
 if [ -f "${flagfile}" ]; then
     echo "$flagfile exists, skip..."
     exit 0
@@ -41,10 +41,11 @@ esxihost="gen8.sys.ink"
 logfile=${logdir}/graceful_poweron_gen8.log
 flagfile=/tmp/poweron_flag_gen8
 
-#echo "--------------------------------------------------------" >> ${logfile}
-#echo "$(date): This is $(whoami) serving for you" >>${logfile}
-#echo "$(date): Start to power on esxi host - ${esxihost}" >> ${logfile}
-#${workingdir}/util_bmc_poweron_host.sh ${esxiuser} ${esxihost} ${workingdir} ${flagfile} >>${logfile}
-#echo "$(date): Power on esxi host finished - ${esxihost}" >> ${logfile}
+echo "--------------------------------------------------------" >> ${logfile}
+echo "$(date): This is $(whoami) serving for you" >>${logfile}
+echo "$(date): Start to power on esxi host - ${esxihost}" >> ${logfile}
+${workingdir}/util_bmc_poweron_host.sh ${esxiuser} ${esxihost} ${workingdir} ${flagfile} >>${logfile}
+echo "$(date): Power on esxi host finished - ${esxihost}" >> ${logfile}
 
+flagfile=/tmp/poweron_flag_running
 /bin/rm -f ${flagfile}

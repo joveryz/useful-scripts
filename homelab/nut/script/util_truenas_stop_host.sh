@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 nasuser=$1
 nashost=$2
@@ -24,10 +24,10 @@ retrycount=10
 while [[ $retrycount -ne 0 ]]; do
     ping -4 -c 3 ${nashost} >/dev/null 2>&1
     if [ $? -ne 0 ]; then
-        echo "$(date): $0 heartbeat lost successfully"
+        echo "$(date): $0 expecting nas host heartbeat lost succeeded"
         retrycount=1
     else
-        echo "$(date): $0 waiting for heartbeat loss..."
+        echo "$(date): $0 waiting for nas host heartbeat loss, retry left ${retrycount}"
         sleep 5
     fi
     retrycount=$((retrycount - 1))

@@ -30,7 +30,7 @@ while [[ $retrycount -ne 0 ]]; do
         retrycount=1
     else
         echo "$(date): $0 waiting for nas host heartbeat loss, retry left ${retrycount}"
-        sleep 5
+        sleep 30
     fi
     retrycount=$((retrycount - 1))
 done

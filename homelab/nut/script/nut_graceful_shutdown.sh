@@ -2,7 +2,7 @@
 
 logdir=/etc/nut/log
 workingdir="/etc/nut/script"
-logfile=${logdir}/graceful_shutdown.log
+logfile=${logdir}/graceful_shutdown_$(date '+%Y_%m_%d_%H_%M_%S_%s').log
 
 # Shutdown HomeGen8
 esxiuser="root"

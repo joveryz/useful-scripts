@@ -2,6 +2,7 @@
 
 logdir=/etc/nut/log
 workingdir="/etc/nut/script"
+logfile=${logdir}/graceful_poweron.log
 
 flagfile=/tmp/poweron_flag_running
 if [ -f "${flagfile}" ]; then
@@ -14,7 +15,6 @@ touch ${flagfile}
 # Poweron NAS
 nsuser="root"
 nashost="nas.sys.ink"
-logfile=${logdir}/graceful_poweron_nas.log
 flagfile=/tmp/poweron_flag_nas
 
 echo "--------------------------------------------------------" >>${logfile}
@@ -31,7 +31,6 @@ fi
 # Poweron HomeGen6
 esxiuser="root"
 esxihost="gen6.sys.ink"
-logfile=${logdir}/graceful_poweron_gen6.log
 flagfile=/tmp/poweron_flag_gen6
 
 echo "--------------------------------------------------------" >>${logfile}
@@ -43,7 +42,6 @@ echo "$(date): Power on esxi host finished - ${esxihost}" >>${logfile}
 # Poweron HomeGen8
 esxiuser="root"
 esxihost="gen8.sys.ink"
-logfile=${logdir}/graceful_poweron_gen8.log
 flagfile=/tmp/poweron_flag_gen8
 
 echo "--------------------------------------------------------" >> ${logfile}

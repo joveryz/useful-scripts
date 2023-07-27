@@ -23,6 +23,11 @@ echo "$(date): Start to power on nas host - ${nashost}" >>${logfile}
 ${workingdir}/util_bmc_poweron_host.sh ${nsuser} ${nashost} ${workingdir} ${flagfile} >>${logfile}
 echo "$(date): Power on nas host finished - ${nashost}" >>${logfile}
 
+if [ ! -f "${flagfile}" ]; then
+    echo "Power on nas failed because $flagfile not exists, skip..." >>${logfile}
+    exit 0
+fi
+
 # Poweron HomeGen6
 esxiuser="root"
 esxihost="gen6.sys.ink"

@@ -8,7 +8,7 @@ totalvms=0
 totalvmsshutdown=0
 totalvmspowereddown=0
 
-waitretries=3
+waitretries=5
 waitdelay=10
 maxwait=$((waitretries * waitdelay))
 
@@ -21,9 +21,9 @@ fi
 
 echo "$(date): $0 ${esxiuser}@${esxihost} max wait time=${maxwait}s"
 echo "VMs on this esxi host:"
-ssh -o connecttimeout=10 "${esxiuser}"@"${esxihost}" vim-cmd vmsvc/getallvms
+ssh -o connecttimeout=5 "${esxiuser}"@"${esxihost}" vim-cmd vmsvc/getallvms
 
-guestvmids=$(ssh -o connecttimeout=10 "${esxiuser}"@"${esxihost}" vim-cmd vmsvc/getallvms | awk '$1 ~ /^[0-9]+$/ {print $1}')
+guestvmids=$(ssh -o connecttimeout=5 "${esxiuser}"@"${esxihost}" vim-cmd vmsvc/getallvms | awk '$1 ~ /^[0-9]+$/ {print $1}')
 
 for guestvmid in $guestvmids; do
   totalvms=$((totalvms + 1))

@@ -14,7 +14,7 @@ if [ -f "${flagfile}" ]; then
     exit 0
 fi
 
-retrycount=10
+retrycount=5
 while [[ $retrycount -ne 0 ]]; do
     result=$(curl -k -s --location https://oob-${bmchost}/redfish/v1/Systems/1/Actions/ComputerSystem.Reset --header 'Authorization: Basic enRiNTEyOTpPT0IvQ3ludGhpYS8wODA1' --header 'Content-Type: application/json' --data '{"ResetType": "On"}')
     echo "$(date): $0 ${result}"
@@ -23,7 +23,7 @@ while [[ $retrycount -ne 0 ]]; do
         retrycount=1
     else
         echo "$(date): $0 sending poweron command to bmc failed, retry left ${retrycount}"
-        sleep 10
+        sleep 2
     fi
     retrycount=$((retrycount - 1))
 done
@@ -37,7 +37,7 @@ while [[ $retrycount -ne 0 ]]; do
         touch ${flagfile}
         retrycount=1
     else
-        echo "$(date): $0 waiting for heartbeat..."
+        echo "$(date): $0 waiting for heartbeat..., retry left ${retrycount}"
         sleep 30
     fi
     retrycount=$((retrycount - 1))
